@@ -1,6 +1,6 @@
 import express, { Express } from 'express';
-import { graphqlHTTP } from 'express-graphql';
 import { buildSchema, GraphQLSchema } from 'graphql';
+import { createHandler } from 'graphql-http/lib/use/express'; // Import from graphql-http
 import cors from 'cors';
 
 const app: Express = express(); // Typing Express instance
@@ -13,18 +13,17 @@ const schema: GraphQLSchema = buildSchema(`
     }
 `);
 
+// Resolver
 const root = {
     hello: (): string => 'Hello world!', // Explicit return type for resolver function
 };
 
-app.use(
-    'graphql',
-    graphqlHTTP({
-        schema: schema,
-        rootValue: root,
-        graphiql: true, // Is this a typo?
-    })
-);
+// Using graphql-http's createHandler for Express
+app.use('graphql', createHandler({
+    schema: schema,
+    rootValue: root,
+    context: async (req) => ({ req }), // optional context example, if needed
+}));
 
 const PORT: number = Number(process.env.PORT) || 4000; // Ensure PORT is a number
 app.listen(PORT, () => {
