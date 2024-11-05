@@ -1,15 +1,14 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
+import Login from './pages/Login';
 
-test('renders login page', () => {
-  render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-  );
+test('renders login page', async () => {
+  render(<Login />);
 
-  // Look for text in the Login component to confirm it rendered
-  const loginText = screen.getByText(/Log In/i);
-  expect(loginText).toBeInTheDocument();
+  // Print out the DOM to check if the button is actually rendered as expected
+  screen.debug();
+
+  // Look for a "Log In" button or link
+  const loginButton  = await screen.findByRole('button', { name: /Log In/i }, { timeout: 2000 });
+  expect(loginButton).toBeInTheDocument();
 });

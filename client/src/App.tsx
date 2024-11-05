@@ -1,8 +1,8 @@
+// client/src/App.tsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Login from './pages/Login';
-import './App.css';
 
 const App: React.FC = ()=> {
   return (
@@ -15,6 +15,6 @@ const App: React.FC = ()=> {
       </Layout>
     </Router>
   );
-}
+};
 
 export default App;
