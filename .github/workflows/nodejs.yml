@@ -36,6 +36,7 @@ jobs:
               run: npm run lint
 
             - name: Run Jest tests
+              working-directory: ./client
               run: npm test
 
             - name: Build application
