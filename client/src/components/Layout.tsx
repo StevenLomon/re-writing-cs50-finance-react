@@ -44,7 +44,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
             <footer className="mb-5">
                 <p className="mb-3 small text-center text-muted">
-                    Data provided by <a href="https://finance.yahoo.com/">Yahoo</a>
+                    Data provided by <a href="https://https://www.alphavantage.co/">Alpha Vantage</a>
                 </p>
             </footer>
         </>

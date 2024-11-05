@@ -1,13 +1,19 @@
 import React from 'react';
-import HelloWorld from './components/HelloWorld';
-// import logo from './logo.svg';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import Login from './pages/Login';
 import './App.css';
 
-function App() {
+const App: React.FC = ()=> {
   return (
-    <div className="App">
-      <HelloWorld />
-    </div>
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path='/login' element={<Login />} />
+          {/* Other routes go here */}
+        </Routes>
+      </Layout>
+    </Router>
   );
 }
 
