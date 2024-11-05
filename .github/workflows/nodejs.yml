@@ -23,10 +23,10 @@ jobs:
               with:
                 node-version: '20'
             
-            - name: Clear cache and install dependencies
+            - name: Install dependencies
               run: |
-                rm -rf node_modules
-                npm install
+                npm install               # Install dependencies in the root
+                cd client && npm install  # Install dependencies in the client directory
 
             - name: Run ESLint
               run: npm run lint
