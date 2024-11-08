@@ -14,18 +14,25 @@ generator client {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  username  String    @unique
-  hash      String    
-  cash      Decimal   @default(10000.00)
+  id            Int           @id @default(autoincrement())
+  username      String        @unique
+  hash          String    
+  cash          Decimal       @default(10000.00)
+
+// Define the one-to-many relationship to Transaction
+  transactions  Transaction[]
 }
 
+
 model Transaction {
-  id        Int       @id @default(autoincrement())
-  userId    Int       ???
-  type      String    
-  symbol    String
-  price     ???
-  shares    Int
-  timestamp 
+  id            Int       @id @default(autoincrement())
+  userId        Int       @relation(fields: [userId], references: [id])
+  type          String    
+  symbol        String
+  price         Decimal
+  shares        Int
+  timestamp     DateTime  @default(now())
+
+// Define the relationship to User
+  userId        User      @relation(fields: [userId], references: [id])
 }
