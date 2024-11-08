@@ -3,6 +3,7 @@ import { buildSchema, GraphQLSchema } from 'graphql';
 import { createHandler } from 'graphql-http/lib/use/express'; // Import from graphql-http
 import { PrismaClient } from '@prisma/client';
 import cors from 'cors';
+import bcrypt from 'bcrypt';
 
 // The type is inferred in the following two lines
 const app = express();
@@ -52,14 +53,20 @@ app.listen(PORT, async () => {
 
     try {
         // Insert a test user into the User table
+        const plainPassword = 'mysecurepassword123';
+
+        // Hash the password with 10 salt rounds
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(plainPassword, saltRounds);
+
         const testUser = await prisma.user.create({
             data: {
                 username: 'testuser',
-                hash: 'hashedpassword123',
+                hash: hashedPassword,
                 cash: 10000.00,
             },
         });
-        console.log('Test user created:', testUser);
+        console.log('Test user created with hashed password:', testUser);
     } catch (error) {
         console.error('Error inserting test user:', error);
     } finally {
