@@ -11,7 +11,8 @@
   "include": [
     "src/**/*.ts",
     "client/**/*.ts",
-    "client/**/*.tsx"
+    "client/**/*.tsx",
+    "types"
   ],
   "exclude": [
     "node_modules",
